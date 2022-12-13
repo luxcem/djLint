@@ -12,6 +12,7 @@ from .formatter.css import format_css
 from .formatter.expand import expand_html
 from .formatter.indent import indent_html
 from .formatter.js import format_js
+from .formatter.whitespace import clean_whitespace
 from .settings import Config
 
 
@@ -26,6 +27,7 @@ def reformat_file(config: Config, this_file: Path) -> dict:
     condensed = condense_html(expanded, config)
 
     beautified_code = indent_html(condensed, config)
+    beautified_code = clean_whitespace(beautified_code, config)
 
     if config.format_css:
         beautified_code = format_css(beautified_code, config)
